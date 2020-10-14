@@ -10,10 +10,13 @@ const textLines = (props) => {
         }
         return <span>{el + " "}</span>
     })
+
     return (
-        <div>
-            <span>{props.lineNumber}</span> <span>{x}</span>
-        </div>
+        <React.Fragment>
+            <div className="twidth">
+                <span>{props.lineNumber}</span> <span>{x}</span>
+            </div>
+        </React.Fragment>
     );
 }
 

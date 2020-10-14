@@ -9,4 +9,5 @@
     font-weight: bold;
     color: crimson;
     position: absolute;
+    z-index: 10;
 }

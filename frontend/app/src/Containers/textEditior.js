@@ -5,7 +5,7 @@ import TextLines from '../Components/textLines';
 
 class TextEditor extends Component {
     state = {
-        editorContent: "ok asn"
+        editorContent: null
     }
 
     componentDidMount() {
