@@ -4,20 +4,22 @@ import classes from './textLines.module.css';
 import TextLine from './textLine/textLine';
 
 const textLines = (props) => {
-    let content = null;
-    if (props.textContent) {
-        content = props.textContent.split('\n').map((el, index) => {
-            return <TextLine key={index + 1} textContents={el} lineNumber={index + 1} />
+    let x = null;
+    if (props.content) {
+        const arr = props.content.split("\n");
+        x = arr.map((el,indexEl) => {
+            return <TextLine line={el} lineNumber={indexEl+1} />
         })
     }
     else {
-        content = <TextLine key={Math.random()} textContents="add content" />
+        x = <span>no conetent</span>
     }
+
     return (
-        <React.Fragment>
-            
-            {content}
-        </React.Fragment>
+        <div className={classes.TextLines}>
+            <div className={classes.FakePointer}>|</div>
+            {x}
+        </div>
     );
 }
 

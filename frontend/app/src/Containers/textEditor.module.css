@@ -11,3 +11,7 @@
     height: 25px;
     
 }
+
+textarea{
+    opacity: 0;
+}
