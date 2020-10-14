@@ -1,0 +1,14 @@
+.TextLinesContent{
+    text-align: left;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.LineNumber{
+    color: white;
+    margin-left: 10px;
+    margin-right: 13px;
+    text-align: right;
+    justify-content: baseline;
+}
+
