@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 
 import classes from './textEditor.module.css';
 import Editor from '../Components/Editor/Editor';
+import SideDrawer from '../Components/UI/sideDrawer/sideDrawer';
 
 class TextEditor extends Component {
     state = {
-        code: "// Write your code here ..."
+        code: "// Write your code here ...",
+        language: "plaintext",
+        editorWidth: "96%"
     }
 
     componentDidMount() {
@@ -25,10 +28,20 @@ class TextEditor extends Component {
         console.log(this.state.code);
     }
 
+    drawerToggler = ()=>{
+        this.setState({editorWidth: "90%"});
+    }
+
     render() {
         return (
             <div className={classes.Main}>
-                <Editor code={this.state.code} change={this.onChange} editorMount={this.editorDidMount} />
+                <SideDrawer click={this.drawerToggler} />
+                <Editor
+                    code={this.state.code}
+                    change={this.onChange}
+                    editorMount={this.editorDidMount}
+                    editorWidth={this.state.editorWidth} 
+                />
             </div>
         );
     }
