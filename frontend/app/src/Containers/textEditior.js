@@ -22,7 +22,7 @@ class TextEditor extends Component {
     onChange = (newValue, e) => {
         // console.log('onChange', e);
         this.setState({ code: e });
-        // console.log(this.state.code);
+        console.log(this.state.code);
     }
 
     render() {
