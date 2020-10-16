@@ -1,17 +1,5 @@
 .Main{
     width: 100%;
     height: 90vh;
-    background-color: rgb(28, 39, 51);
-}
-
-.FakePointer{
-    width: 2px;
-    background-color: red;
-    position: fixed;
-    height: 25px;
-    
-}
-
-textarea{
-    opacity: 0;
+    background-color: rgb(95, 121, 150);
 }
