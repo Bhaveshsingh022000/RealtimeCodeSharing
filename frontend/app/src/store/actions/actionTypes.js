@@ -1,0 +1,2 @@
+export const SET_ROOM = 'SET_ROOM';
+export const FETCHING_ROOM_FAILED = 'FETCHING_ROOM_FAILED';
