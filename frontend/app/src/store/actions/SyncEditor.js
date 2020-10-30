@@ -15,14 +15,17 @@ export const fetchingRoomFailed = () => {
     }
 }
 
-export const getRoomName = () => {
-    return dispatch => {
-        axios.get("http://localhost:3005/joinRoom")
-            .then(res => {
-                dispatch(setRoomName(res.data));
-            })
-            .catch(err => {
-                dispatch(fetchingRoomFailed());
-            })
+export const getRoomName = (name) => {
+    // return dispatch => {
+    //     axios.get("http://localhost:3005/joinRoom")
+    //         .then(res => {
+    //             dispatch(setRoomName(res.data.roomName));
+    //         })
+    //         .catch(err => {
+    //             dispatch(fetchingRoomFailed());
+    //         })
+    // }
+    return dispatch =>{
+        dispatch(setRoomName(name));
     }
 }

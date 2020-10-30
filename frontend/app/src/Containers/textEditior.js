@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
 import axios from 'axios';
+import {connect} from 'react-redux';
 
 import classes from './textEditor.module.css';
 import Editor from '../Components/Editor/Editor';
@@ -17,7 +18,7 @@ class TextEditor extends Component {
 
     componentDidMount() {
         console.log("editor component");
-        socket.emit('join', this.state.room);
+        socket.emit('join', this.props.roomName);
         socket.on('chat', msg => {
           this.setState({ code: msg });
         })
@@ -30,14 +31,14 @@ class TextEditor extends Component {
         // })
     }
     editorDidMount = (editor, monaco) => {
-        // console.log('editorDidMount', this.state.code);
+        console.log('editorDidMount', this.props.roomName);
         // editor.focus();
     }
     
     onChange = (newValue, e) => {
         // console.log('onChange', e);
         this.setState({ code: e }); 
-        socket.emit('chat', { message: this.state.code, room: this.state.room });
+        socket.emit('chat', { message: this.state.code, room: this.props.roomName });
     }
 
 
@@ -60,4 +61,10 @@ class TextEditor extends Component {
     }
 }
 
-export default TextEditor;
+const mapStateToProps = state => {
+    return {
+        roomName: state.editor.roomName
+    }
+}
+
+export default connect(mapStateToProps,null)(TextEditor);

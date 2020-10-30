@@ -40,6 +40,7 @@ io.on("connection", socket => {
     });
     socket.on('chat',data =>{
         const {message, room} = data;
+        // console.log(message);
         io.to(room).emit('chat',message);
     })
 })
