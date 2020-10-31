@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import * as actions from '../../store/actions/SyncEditor';
+import * as actions from '../../store/actions/index';
+
+import CoverImage from '../../Components/Landing/CoverImage';
+import AuthForm from '../Auth/AuthForm';
 
 class Landing extends Component {
     state = {
@@ -16,19 +19,34 @@ class Landing extends Component {
     formHandler = (event) => {
         event.preventDefault();
         this.props.onJoinRoom(this.state.formData);
-    }
-    clickHandel = (event) => {
         this.props.history.push('/editor');
     }
+    clickHandel = () => {
+        if (this.props.roomName === null) {
+            const roomName = Math.round((Math.pow(36, 6 + 1) - Math.random() * Math.pow(36, 6))).toString(36).slice(1);
+            this.props.onJoinRoom(roomName);
+        }
+        this.props.history.push('/editor');
+    }
+
     render() {
+        let form = <AuthForm />
+        if (this.props.isAuth) {
+            form = (
+                <React.Fragment>
+                    <form onSubmit={this.formHandler}>
+                        <input type="text" onChange={(event) => this.changeHandler(event)} name="roomName" />
+                        <button type="submit">Join</button>
+                    </form>
+                    <button onClick={this.clickHandel}>Share</button>
+                </React.Fragment>
+            );
+        }
         return (
             <div>
                 <h1>Landing Page {this.props.roomName}</h1>
-                <form onSubmit={this.formHandler}>
-                    <input type="text" onChange={(event) => this.changeHandler(event)} name="roomName" />
-                    <button type="submit">Join</button>
-                </form>
-                <button onClick={this.clickHandel}>Share</button>
+                {form}
+                <CoverImage />
             </div>
         );
     }
@@ -36,13 +54,14 @@ class Landing extends Component {
 
 const mapStateToProps = state => {
     return {
-        roomName: state.editor.roomName
+        roomName: state.editor.roomName,
+        isAuth: state.auth.isAuth
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onJoinRoom: (name) => dispatch(actions.getRoomName(name))
+        onJoinRoom: (name) => dispatch(actions.getRoomName(name)),
     }
 }
 

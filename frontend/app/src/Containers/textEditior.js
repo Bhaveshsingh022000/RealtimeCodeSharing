@@ -49,6 +49,7 @@ class TextEditor extends Component {
     render() {
         return (
             <div className={classes.Main}>
+                <h1>{this.props.roomName}</h1>
                 <SideDrawer click={this.drawerToggler} />
                 <Editor
                     code={this.state.code}

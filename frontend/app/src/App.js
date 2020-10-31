@@ -20,7 +20,6 @@ class App extends Component {
   render() {
     return (  
       <div className="App">
-        <h1> here</h1>
         <Switch>
           <Route path="/editor" exact component={TextEditor} />
           <Route path="/" component={Landing} />
