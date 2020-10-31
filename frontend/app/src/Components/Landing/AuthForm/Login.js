@@ -7,6 +7,7 @@ const login = (props) => {
             <form>
                 <input type="email" name="email" />
                 <input type="password" name="password" />
+                <br />
                 <button>Login</button>
             </form>
         </div>

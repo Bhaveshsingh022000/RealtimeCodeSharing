@@ -5,6 +5,7 @@ import * as actions from '../../store/actions/index';
 
 import CoverImage from '../../Components/Landing/CoverImage';
 import AuthForm from '../Auth/AuthForm';
+import classes from './Landing.module.css';
 
 class Landing extends Component {
     state = {
@@ -45,7 +46,9 @@ class Landing extends Component {
         return (
             <div>
                 <h1>Landing Page {this.props.roomName}</h1>
+                <div className={classes.LandingContainer}>
                 {form}
+                </div>
                 <CoverImage />
             </div>
         );
