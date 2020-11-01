@@ -2,7 +2,8 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     isAuth: false,
-    error: false
+    error: false,
+    loading: false
 }
 
 const reducer = (state = initialState, action)=>{
@@ -10,7 +11,13 @@ const reducer = (state = initialState, action)=>{
         case actionTypes.SET_AUTH:
             return{
                 ...state,
-                isAuth: action.isAuth
+                isAuth: action.isAuth,
+                loading: action.loading
+            }
+        case actionTypes.AUTH_START:
+            return{
+                ...state,
+                loading: action.loading
             }
         default:
             return state

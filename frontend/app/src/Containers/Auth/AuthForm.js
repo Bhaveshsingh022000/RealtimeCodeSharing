@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import InputElement from '../../Components/UI/Input/Input';
 import classes from './AuthForm.module.css';
+import Spinner from '../../Components/UI/Spinner/Spinner';
 
 class Auth extends Component {
     state = {
@@ -170,6 +171,9 @@ class Auth extends Component {
                 />
             ))
         }
+        if(this.props.loading){
+            form = <Spinner />
+        }
         return (
             <div className={classes.FormContainer}>
                 <form onSubmit={(event) => this.formSubmitHandler(event)}>
@@ -186,7 +190,8 @@ class Auth extends Component {
 
 const mapStateToProps = state => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        loading: state.auth.loading
     }
 }
 
