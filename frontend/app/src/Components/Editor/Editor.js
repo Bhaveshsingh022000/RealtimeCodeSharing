@@ -14,7 +14,7 @@ const editor = (props) => {
             <ControlledEditor
                 width="100%"
                 height="100%"
-                language="sql"
+                language="javascript"
                 theme="vs-dark"
                 fontSize="50px"
                 value={props.code}

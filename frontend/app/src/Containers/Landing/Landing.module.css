@@ -1,0 +1,7 @@
+.LandingContainer{
+    width: 40%;
+    height: 70vh;
+    padding: 5px;
+    background-color:green;
+    display: inline-block;
+}
