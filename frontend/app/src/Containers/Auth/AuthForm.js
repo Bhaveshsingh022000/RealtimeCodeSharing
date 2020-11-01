@@ -17,6 +17,7 @@ class Auth extends Component {
                 value: "",
                 validation: {
                     required: true,
+                    minLength: 3
                 },
                 valid: false,
                 touched: false
@@ -95,14 +96,27 @@ class Auth extends Component {
     signinInputChangedHandler = (event, inputName) => {
         const updatedForm = {
             ...this.state.signupForm,
-            [inputName]:{
+            [inputName]: {
                 ...this.state.signupForm[inputName],
                 value: event.target.value,
                 touched: true,
             }
         }
-        this.setState({signupForm: updatedForm});
+        this.setState({ signupForm: updatedForm });
     }
+
+    loginInputChangeHandler = (event, inputName) => {
+        const updatedForm = {
+            ...this.state.loginForm,
+            [inputName]: {
+                ...this.state.loginForm[inputName],
+                value: event.target.value,
+                touched: true,
+            }
+        }
+        this.setState({ loginForm: updatedForm });
+    }
+
 
     formShowHandler = () => {
         this.setState((state, props) => ({
@@ -117,7 +131,7 @@ class Auth extends Component {
         }
     }
 
-    
+
 
     render() {
 
@@ -136,6 +150,7 @@ class Auth extends Component {
                     elementConfig={el.config.elementConfig}
                     name={el.id}
                     changed={(event) => this.signinInputChangedHandler(event, el.id)}
+                    minLength={el.config.validation.minLength}
                 />
             ))
         }
@@ -152,6 +167,8 @@ class Auth extends Component {
                     key={el.id}
                     elementConfig={el.config.elementConfig}
                     name={el.id}
+                    changed={(event) => this.loginInputChangeHandler(event, el.id)}
+                    minLength={el.config.validation.minLength}
                 />
             ))
         }
@@ -163,7 +180,6 @@ class Auth extends Component {
                     <button type="submit">{this.state.showLogin ? 'Login' : 'Signup'}</button>
                 </form>
                 <p>or</p>
-        <p>{this.state.signupForm.email.value}</p>
                 {this.state.showLogin ? <button className={classes.switchBtn} onClick={this.formShowHandler}>Signup</button> : <button onClick={this.formShowHandler}>Login</button>}
             </div>
         );
