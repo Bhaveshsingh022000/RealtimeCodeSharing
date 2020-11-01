@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
-import axios from 'axios';
 import {connect} from 'react-redux';
 
 import classes from './textEditor.module.css';

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import TextEditor from './Containers/textEditior';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import Landing from './Containers/Landing/Landing';
-import axios from 'axios';
 
 class App extends Component {
   state = {
