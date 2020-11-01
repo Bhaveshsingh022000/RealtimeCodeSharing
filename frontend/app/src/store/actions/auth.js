@@ -16,6 +16,15 @@ export const startAuth = ()=>{
     } 
 }
 
+export const loginFailed = (message)=>{
+    return{
+        type: actionTypes.FAILED_LOGIN,
+        loading: false,
+        isAuth: false,
+        error: message
+    }
+}
+
 export const startLogin = (email,password)=>{
     return dispatch =>{
         dispatch(startAuth());
@@ -25,10 +34,19 @@ export const startLogin = (email,password)=>{
         }
         axios.post('http://localhost:3005/login', formData)
             .then(res =>{
+                // console.log(res.data);
+                if (res.status === 422) {
+                    throw new Error('Validation failed.');
+                  }
+                  if (res.status !== 200 && res.status !== 201) {
+                    console.log('Error!');
+                    throw new Error('Could not authenticate you!');
+                  }
                 dispatch(setAuth());
             })
             .catch(err =>{
-                console.log(err);
+                dispatch(loginFailed(err));
+                console.log(err.response.data.message);
             })
     }
 }

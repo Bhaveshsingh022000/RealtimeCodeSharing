@@ -19,6 +19,13 @@ const reducer = (state = initialState, action)=>{
                 ...state,
                 loading: action.loading
             }
+        case actionTypes.FAILED_LOGIN:
+            return{
+                ...state,
+                loading: action.loading,
+                isAuth: action.isAuth,
+                error: action.error
+            }
         default:
             return state
     }

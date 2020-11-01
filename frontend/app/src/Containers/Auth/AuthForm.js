@@ -128,7 +128,7 @@ class Auth extends Component {
     formSubmitHandler = (event) => {
         event.preventDefault();
         if (this.state.showLogin) {
-            this.props.onLogin();
+            this.props.onLogin(this.state.loginForm.email.value,this.state.loginForm.password.value);
         }
     }
 
@@ -197,7 +197,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogin: () => dispatch(actions.startAuth())
+        onLogin: (email,password) => dispatch(actions.startLogin(email,password))
     }
 }
 

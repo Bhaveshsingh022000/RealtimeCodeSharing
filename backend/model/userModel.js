@@ -3,9 +3,19 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const editorSchema = new Schema({
-    content:{
-        type: String
+    name: {
+        type: String,
+        minlength: 3,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
     }
 });
 
-module.exports = mongoose.model('Editor',editorSchema);
+module.exports = mongoose.model('Users', editorSchema);
