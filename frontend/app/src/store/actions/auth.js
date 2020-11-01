@@ -45,8 +45,8 @@ export const startLogin = (email,password)=>{
                 dispatch(setAuth());
             })
             .catch(err =>{
-                dispatch(loginFailed(err));
-                console.log(err.response.data.message);
+                dispatch(loginFailed(err.response.data.message));
+                // console.log(err.response.data.message);
             })
     }
 }
