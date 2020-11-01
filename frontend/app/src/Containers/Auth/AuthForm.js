@@ -131,8 +131,6 @@ class Auth extends Component {
         }
     }
 
-
-
     render() {
 
         let form;
