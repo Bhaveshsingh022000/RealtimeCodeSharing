@@ -1,11 +1,12 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
-export const setAuth = () => {
+export const setAuth = (userName) => {
     return{
         type: actionTypes.SET_AUTH,
         isAuth: true,
-        loading: false
+        loading: false,
+        userName: userName
     }
 }
 
@@ -34,7 +35,7 @@ export const startLogin = (email,password)=>{
         }
         axios.post('http://localhost:3005/login', formData)
             .then(res =>{
-                // console.log(res.data);
+                console.log(res.data);
                 if (res.status === 422) {
                     throw new Error('Validation failed.');
                   }
@@ -42,7 +43,7 @@ export const startLogin = (email,password)=>{
                     console.log('Error!');
                     throw new Error('Could not authenticate you!');
                   }
-                dispatch(setAuth());
+                dispatch(setAuth(res.data.name));
             })
             .catch(err =>{
                 dispatch(loginFailed(err.response.data.message));

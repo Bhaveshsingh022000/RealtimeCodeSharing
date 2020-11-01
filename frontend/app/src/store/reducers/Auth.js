@@ -3,7 +3,8 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     isAuth: false,
     error: false,
-    loading: false
+    loading: false,
+    userName: null
 }
 
 const reducer = (state = initialState, action)=>{
@@ -12,7 +13,8 @@ const reducer = (state = initialState, action)=>{
             return{
                 ...state,
                 isAuth: action.isAuth,
-                loading: action.loading
+                loading: action.loading,
+                userName: action.userName
             }
         case actionTypes.AUTH_START:
             return{
