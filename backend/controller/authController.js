@@ -33,3 +33,13 @@ exports.postLogin = (req, res, next) => {
             next(err);
         })
 }
+
+exports.postSignUp = (req,res,next)=>{
+    const email = req.body.email;
+    const pass = req.body.password;
+    const name = req.body.name;
+    console.log(email,pass,name);
+    res.json({
+        message: "ok"
+    })
+}

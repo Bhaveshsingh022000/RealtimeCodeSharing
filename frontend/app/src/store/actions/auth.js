@@ -84,10 +84,12 @@ export const postSignUp = (name,email,password)=>{
         }
         axios.post('http://localhost:3005/signup',formData)
         .then(res=>{
-
+            console.log(res.data);
+            dispatch(successSignUp());
         })
         .catch(err =>{
-            
+            console.log(err);
+            dispatch(failedSignUp("error"));
         })
     }
 }
