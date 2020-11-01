@@ -54,14 +54,14 @@ export const startLogin = (email,password)=>{
 
 export const startSignUp = ()=>{
     return{
-        type: actionTypes.SIGNIN_START,
+        type: actionTypes.SIGNUP_START,
         loading: true
     }
 }
 
 export const failedSignUp = (message)=>{
     return{
-        type: actionTypes.SIGNIN_FAILED,
+        type: actionTypes.SIGNUP_FAILED,
         loading: false,
         error: message
     }
@@ -69,7 +69,7 @@ export const failedSignUp = (message)=>{
 
 export const successSignUp = ()=>{
     return{
-        type: actionTypes.SIGNIN_SUCCESS,
+        type: actionTypes.SIGNUP_SUCCESS,
         loading: false
     }
 }
@@ -82,6 +82,12 @@ export const postSignUp = (name,email,password)=>{
             email: email,
             password: password
         }
-        axios.post('http://localhost:3005/signup')
+        axios.post('http://localhost:3005/signup',formData)
+        .then(res=>{
+
+        })
+        .catch(err =>{
+            
+        })
     }
 }
