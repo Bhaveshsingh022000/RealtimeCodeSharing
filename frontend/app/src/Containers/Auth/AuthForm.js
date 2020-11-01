@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import Login from '../../Components/Landing/AuthForm/Login';
+import * as actions from '../../store/actions/index';
 import InputElement from '../../Components/UI/Input/Input';
 import classes from './AuthForm.module.css';
 
@@ -91,11 +92,32 @@ class Auth extends Component {
 
     }
 
+    signinInputChangedHandler = (event, inputName) => {
+        const updatedForm = {
+            ...this.state.signupForm,
+            [inputName]:{
+                ...this.state.signupForm[inputName],
+                value: event.target.value,
+                touched: true,
+            }
+        }
+        this.setState({signupForm: updatedForm});
+    }
+
     formShowHandler = () => {
         this.setState((state, props) => ({
             showLogin: !state.showLogin
         }))
     }
+
+    formSubmitHandler = (event) => {
+        event.preventDefault();
+        if (this.state.showLogin) {
+            this.props.onLogin();
+        }
+    }
+
+    
 
     render() {
 
@@ -113,6 +135,7 @@ class Auth extends Component {
                     key={el.id}
                     elementConfig={el.config.elementConfig}
                     name={el.id}
+                    changed={(event) => this.signinInputChangedHandler(event, el.id)}
                 />
             ))
         }
@@ -134,16 +157,29 @@ class Auth extends Component {
         }
         return (
             <div className={classes.FormContainer}>
-                <form>
+                <form onSubmit={(event) => this.formSubmitHandler(event)}>
                     <h1>{this.state.showLogin ? 'Login' : 'Signup'}</h1>
                     {form}
                     <button type="submit">{this.state.showLogin ? 'Login' : 'Signup'}</button>
                 </form>
                 <p>or</p>
+        <p>{this.state.signupForm.email.value}</p>
                 {this.state.showLogin ? <button className={classes.switchBtn} onClick={this.formShowHandler}>Signup</button> : <button onClick={this.formShowHandler}>Login</button>}
             </div>
         );
     }
 }
 
-export default Auth;
+const mapStateToProps = state => {
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogin: () => dispatch(actions.startAuth())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
