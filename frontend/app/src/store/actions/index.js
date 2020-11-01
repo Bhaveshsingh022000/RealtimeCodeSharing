@@ -5,5 +5,5 @@ getRoomName
 
 export{
     startLogin,
-    postSignIn
+    postSignUp
 } from './auth';

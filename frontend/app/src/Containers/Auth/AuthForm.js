@@ -126,7 +126,7 @@ class Auth extends Component {
             const confpass = this.state.signupForm.confpassword.value;
             if (password === confpass) {
                 this.setState({ error: null });
-                this.props.onSignIn(name, email, password);
+                this.props.onSignUp(name, email, password);
             }
             else {
                 this.setState({ error: "Password and Confirm Password Should be Same" });
@@ -202,7 +202,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onLogin: (email, password) => dispatch(actions.startLogin(email, password)),
-        onSignIn: (name,email,password) => dispatch(actions.postSignIn(name,email,password))
+        onSignUp: (name,email,password) => dispatch(actions.postSignUp(name,email,password))
     }
 }
 

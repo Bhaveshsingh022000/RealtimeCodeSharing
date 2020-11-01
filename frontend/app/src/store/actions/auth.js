@@ -52,14 +52,14 @@ export const startLogin = (email,password)=>{
     }
 }
 
-export const startSignIn = ()=>{
+export const startSignUp = ()=>{
     return{
         type: actionTypes.SIGNIN_START,
         loading: true
     }
 }
 
-export const failedSignIn = (message)=>{
+export const failedSignUp = (message)=>{
     return{
         type: actionTypes.SIGNIN_FAILED,
         loading: false,
@@ -67,16 +67,21 @@ export const failedSignIn = (message)=>{
     }
 }
 
-export const successSignIn = ()=>{
+export const successSignUp = ()=>{
     return{
         type: actionTypes.SIGNIN_SUCCESS,
         loading: false
     }
 }
 
-export const postSignIn = (name,email,password)=>{
+export const postSignUp = (name,email,password)=>{
     return dispatch =>{
-        dispatch(startSignIn());
-        axios.post()
+        dispatch(startSignUp());
+        const formData = {
+            name: name,
+            email: email,
+            password: password
+        }
+        axios.post('http://localhost:3005/signup')
     }
 }

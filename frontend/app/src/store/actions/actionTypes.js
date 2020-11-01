@@ -6,6 +6,6 @@ export const SET_AUTH = 'SET_AUTH';
 export const START_LOGIN = 'START_LOGIN';
 export const FAILED_LOGIN = 'FAILED_LOGIN';
 
-export const SIGNIN_START = 'SIGNIN_START';
-export const SIGNIN_FAILED = 'SIGNIN_FAILED';
-export const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS';
+export const SIGNUP_START = 'SIGNUP_START';
+export const SIGNUP_FAILED = 'SIGNUP_FAILED';
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
