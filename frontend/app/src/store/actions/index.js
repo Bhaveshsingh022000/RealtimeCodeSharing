@@ -4,5 +4,6 @@ getRoomName
 } from './SyncEditor';
 
 export{
-    startLogin
+    startLogin,
+    postSignIn
 } from './auth';

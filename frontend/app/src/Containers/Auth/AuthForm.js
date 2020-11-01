@@ -20,8 +20,6 @@ class Auth extends Component {
                     required: true,
                     minLength: 3
                 },
-                valid: false,
-                touched: false
             },
             email: {
                 elementConfig: {
@@ -33,8 +31,6 @@ class Auth extends Component {
                     required: true,
                     isEmail: true
                 },
-                valid: false,
-                touched: false
             },
             password: {
                 elementConfig: {
@@ -45,9 +41,7 @@ class Auth extends Component {
                 validation: {
                     required: true,
                     minLength: 6
-                },
-                valid: false,
-                touched: false
+                }
             },
             confpassword: {
                 elementConfig: {
@@ -59,8 +53,6 @@ class Auth extends Component {
                     required: true,
                     minLength: 6
                 },
-                valid: false,
-                touched: false
             },
         },
         loginForm: {
@@ -72,10 +64,7 @@ class Auth extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    isEmail: true
                 },
-                valid: false,
-                touched: false
             },
             password: {
                 elementConfig: {
@@ -87,10 +76,9 @@ class Auth extends Component {
                     required: true,
                     minLength: 6
                 },
-                valid: false,
-                touched: false
             },
-        }
+        },
+        error: null
 
     }
 
@@ -125,10 +113,25 @@ class Auth extends Component {
         }))
     }
 
+
     formSubmitHandler = (event) => {
         event.preventDefault();
         if (this.state.showLogin) {
-            this.props.onLogin(this.state.loginForm.email.value,this.state.loginForm.password.value);
+            this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value);
+        }
+        else {
+            const name = this.state.signupForm.name.value;
+            const email = this.state.signupForm.email.value;
+            const password = this.state.signupForm.password.value;
+            const confpass = this.state.signupForm.confpassword.value;
+            if (password === confpass) {
+                this.setState({ error: null });
+                this.props.onSignIn(name, email, password);
+            }
+            else {
+                this.setState({ error: "Password and Confirm Password Should be Same" });
+            }
+
         }
     }
 
@@ -171,7 +174,7 @@ class Auth extends Component {
                 />
             ))
         }
-        if(this.props.loading){
+        if (this.props.loading) {
             form = <Spinner />
         }
         return (
@@ -180,6 +183,7 @@ class Auth extends Component {
                     <h1>{this.state.showLogin ? 'Login' : 'Signup'}</h1>
                     {form}
                     <button type="submit">{this.state.showLogin ? 'Login' : 'Signup'}</button>
+                    <p>{this.state.error}</p>
                 </form>
                 <p>or</p>
                 {this.state.showLogin ? <button className={classes.switchBtn} onClick={this.formShowHandler}>Signup</button> : <button onClick={this.formShowHandler}>Login</button>}
@@ -197,7 +201,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogin: (email,password) => dispatch(actions.startLogin(email,password))
+        onLogin: (email, password) => dispatch(actions.startLogin(email, password)),
+        onSignIn: (name,email,password) => dispatch(actions.postSignIn(name,email,password))
     }
 }
 

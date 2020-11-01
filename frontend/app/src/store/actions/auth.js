@@ -51,3 +51,32 @@ export const startLogin = (email,password)=>{
             })
     }
 }
+
+export const startSignIn = ()=>{
+    return{
+        type: actionTypes.SIGNIN_START,
+        loading: true
+    }
+}
+
+export const failedSignIn = (message)=>{
+    return{
+        type: actionTypes.SIGNIN_FAILED,
+        loading: false,
+        error: message
+    }
+}
+
+export const successSignIn = ()=>{
+    return{
+        type: actionTypes.SIGNIN_SUCCESS,
+        loading: false
+    }
+}
+
+export const postSignIn = (name,email,password)=>{
+    return dispatch =>{
+        dispatch(startSignIn());
+        axios.post()
+    }
+}
