@@ -4,6 +4,7 @@ const login = (props) => {
     return (
         <div>
             <h1>Login</h1>
+            <hr />
             <form>
                 <input type="email" name="email" />
                 <input type="password" name="password" />

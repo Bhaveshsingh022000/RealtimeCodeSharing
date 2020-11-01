@@ -1,6 +1,6 @@
 import React from 'react';
 
-const signup = (props) => {
+const inputForm = (props) => {
     return (
         <div>
             <input {...props.elementConfig} name={props.name} />
@@ -8,4 +8,4 @@ const signup = (props) => {
     );
 }
 
-export default signup;
+export default inputForm;

@@ -7,6 +7,16 @@
 }
 
 input{
-    width: 300px;
-    margin: 5px;
+    width: 350px;
+    height: 20px;
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+    margin: 8px;
+    font-size: 15px;
+}
+
+.switchBtn{
+    background-color: green;
+    height: 30px;
 }
