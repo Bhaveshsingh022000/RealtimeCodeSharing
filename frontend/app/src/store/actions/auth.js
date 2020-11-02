@@ -118,7 +118,7 @@ export const postSignUp = (name, email, password) => {
             })
             .catch(err => {
                 console.log(err.response.data.data);
-                dispatch(err.response.data.data);
+                dispatch(failedSignUp(err.response.data.data));
             })
     }
 }

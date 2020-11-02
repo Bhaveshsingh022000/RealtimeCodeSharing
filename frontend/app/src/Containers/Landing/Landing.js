@@ -38,6 +38,7 @@ class Landing extends Component {
                     <form className={classes.JoinForm} onSubmit={this.formHandler}>
                         <h1>A Real Time Code Editor</h1>
                         <p>for Collabrative Development</p>
+                        <br />
                         <input type="text" required minLength="6" maxLength="6" placeholder="Enter Join ID" onChange={(event) => this.changeHandler(event)} name="roomName" />
                         <button type="submit">Join Editor</button>
                     </form>
@@ -47,6 +48,7 @@ class Landing extends Component {
         }
         return (
             <div className={classes.MainContainer}>
+                {this.props.isAuth ? <button className={classes.LogoutBtn} onClick={()=>this.props.onLogout()}>Logout</button> : null}
                 <h1 className={classes.MainHeading}>{'</>'} CODE SHARING</h1>
                 <CoverImage />
                 
@@ -62,13 +64,15 @@ class Landing extends Component {
 const mapStateToProps = state => {
     return {
         roomName: state.editor.roomName,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        userName : state.auth.userName
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onJoinRoom: (name) => dispatch(actions.getRoomName(name)),
+        onLogout: ()=> dispatch(actions.logout())
     }
 }
 
