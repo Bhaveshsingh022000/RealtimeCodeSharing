@@ -1,4 +1,6 @@
 const UserModel = require('../model/userModel');
+const bcrypt = require('bcryptjs');
+const {validationResult} = require('express-validator/check');
 
 exports.postLogin = (req, res, next) => {
     const email = req.body.email;
@@ -35,6 +37,13 @@ exports.postLogin = (req, res, next) => {
 }
 
 exports.postSignUp = (req,res,next)=>{
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        const error = new Error("Validation Failed");
+        error.statusCode = 422;
+        error.data = errors.array()[0].msg;
+        throw error
+    }
     const email = req.body.email;
     const pass = req.body.password;
     const name = req.body.name;

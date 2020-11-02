@@ -88,8 +88,8 @@ export const postSignUp = (name,email,password)=>{
             dispatch(successSignUp());
         })
         .catch(err =>{
-            console.log(err);
-            dispatch(failedSignUp("error"));
+            console.log(err.response.data.data);
+            dispatch(err.response.data.data);
         })
     }
 }
