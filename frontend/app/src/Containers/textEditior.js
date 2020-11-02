@@ -62,11 +62,11 @@ class TextEditor extends Component {
         this.setState({ fontSize: event.target.value })
     }
 
-    onLanguageChange = (event)=>{
-        this.setState({language: event.target.value})
+    onLanguageChange = (event) => {
+        this.setState({ language: event.target.value })
     }
 
-    goToHomeHandler = ()=>{
+    goToHomeHandler = () => {
         this.props.history.push("/");
     }
 
@@ -77,10 +77,12 @@ class TextEditor extends Component {
                 <button className={classes.HomeBtn} onClick={() => this.goToHomeHandler()}>Home</button>
                 <button className={classes.LogoutBtn} onClick={() => this.props.onLogout()}>Logout</button>
                 <select onChange={(event) => this.onThemeChange(event)}>
+                    <option value="none">Select Theme</option>
                     <option value="vs-dark">Dark</option>
                     <option value="vs-light">Light</option>
                 </select>
                 <select onChange={(event) => this.onFontChange(event)}>
+                    <option value="14">Select Font Size</option>
                     <option value="14">14</option>
                     <option value="16">16</option>
                     <option value="18">18</option>
@@ -89,6 +91,7 @@ class TextEditor extends Component {
                     <option value="24">24</option>
                 </select>
                 <select onChange={(event) => this.onLanguageChange(event)}>
+                    <option value="plaintext">Select Language</option>
                     <option value="plaintext">Plain Text</option>
                     <option value="javascript">JavaScript</option>
                     <option value="json">JSON</option>
