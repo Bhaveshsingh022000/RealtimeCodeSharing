@@ -23,7 +23,7 @@ class TextEditor extends Component {
     componentDidMount() {
         console.log("editor component");
         socket.emit('join', this.props.roomName);
-        socket.on('chat', msg => {
+        socket.on('content', msg => {
             this.setState({ code: msg });
         })
     }
@@ -42,7 +42,7 @@ class TextEditor extends Component {
     onChange = (newValue, e) => {
         // console.log('onChange', e);
         this.setState({ code: e });
-        socket.emit('chat', { message: this.state.code, room: this.props.roomName });
+        socket.emit('content', { message: this.state.code, room: this.props.roomName });
     }
 
 

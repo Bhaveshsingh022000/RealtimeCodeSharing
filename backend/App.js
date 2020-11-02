@@ -32,29 +32,13 @@ mongoose.connect(MONGODB_URI)
                 console.log(`Socket ${socket.id} joined ${room}`);
                 socket.join(room);
             });
-            socket.on('chat', data => {
+            socket.on('content', data => {
                 const { message, room } = data;
                 // console.log(message);
-                io.to(room).emit('chat', message);
+                io.to(room).emit('content', message);
             })
         })
     })
     .catch(err => {
         console.log(err);
     });
-
-// const server = app.listen(3005);
-// const io = require('./socket').init(server);
-// io.on("connection", socket => {
-//     console.log("Client Connected");
-//     socket.on("disconnect",()=> console.log(`Disconnected ${socket.id}`));
-//     socket.on('join',(room)=>{
-//         console.log(`Socket ${socket.id} joined ${room}`);
-//         socket.join(room);
-//     });
-//     socket.on('chat',data =>{
-//         const {message, room} = data;
-//         // console.log(message);
-//         io.to(room).emit('chat',message);
-//     })
-// })
