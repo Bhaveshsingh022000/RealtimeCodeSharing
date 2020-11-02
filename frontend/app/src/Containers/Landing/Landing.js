@@ -38,10 +38,10 @@ class Landing extends Component {
                     <form className={classes.JoinForm} onSubmit={this.formHandler}>
                         <h1>A Real Time Code Editor</h1>
                         <p>for Collabrative Development</p>
-                        <input type="text" placeholder="Room Name" onChange={(event) => this.changeHandler(event)} name="roomName" />
-                        <button type="submit">Join Room</button>
+                        <input type="text" required minLength="6" maxLength="6" placeholder="Enter Join ID" onChange={(event) => this.changeHandler(event)} name="roomName" />
+                        <button type="submit">Join Editor</button>
                     </form>
-                    <button onClick={this.clickHandel}>Share</button>
+                    <button className={classes.ShareBtn} onClick={this.clickHandel}>Share Editor</button>
                 </React.Fragment>
             );
         }
