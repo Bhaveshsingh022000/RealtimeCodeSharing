@@ -14,7 +14,7 @@ const editor = (props) => {
             <ControlledEditor
                 width="100%"
                 height="100%"
-                language="javascript"
+                language={props.language}
                 theme={props.theme}
                 value={props.code}
                 options={options}

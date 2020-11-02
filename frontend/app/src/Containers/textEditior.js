@@ -17,7 +17,7 @@ class TextEditor extends Component {
         room: "testRoom",
         drawerOpen: false,
         editorTheme: "vs-dark",
-        fontSize: 14
+        fontSize: 14,
     }
 
     componentDidMount() {
@@ -54,24 +54,33 @@ class TextEditor extends Component {
         this.setState({ editorWidth: "96%", drawerOpen: false });
     }
 
-    onThemeChange = (event)=>{
-        this.setState({editorTheme:event.target.value})
+    onThemeChange = (event) => {
+        this.setState({ editorTheme: event.target.value })
     }
 
-    onFontChange = (event)=>{
-        this.setState({fontSize: event.target.value})
+    onFontChange = (event) => {
+        this.setState({ fontSize: event.target.value })
+    }
+
+    onLanguageChange = (event)=>{
+        this.setState({language: event.target.value})
+    }
+
+    goToHomeHandler = ()=>{
+        this.props.history.push("/");
     }
 
     render() {
         return (
             <div className={classes.Main}>
-                <h3>Room Id :- {this.props.roomName}</h3>
+                <span className={classes.RoomId}>Room Id :- {this.props.roomName}</span>
+                <button className={classes.HomeBtn} onClick={() => this.goToHomeHandler()}>Home</button>
                 <button className={classes.LogoutBtn} onClick={() => this.props.onLogout()}>Logout</button>
-                <select onChange={(event)=>this.onThemeChange(event)}>
+                <select onChange={(event) => this.onThemeChange(event)}>
                     <option value="vs-dark">Dark</option>
                     <option value="vs-light">Light</option>
                 </select>
-                <select onChange={(event)=>this.onFontChange(event)}>
+                <select onChange={(event) => this.onFontChange(event)}>
                     <option value="14">14</option>
                     <option value="16">16</option>
                     <option value="18">18</option>
@@ -79,7 +88,19 @@ class TextEditor extends Component {
                     <option value="22">22</option>
                     <option value="24">24</option>
                 </select>
-               
+                <select onChange={(event) => this.onLanguageChange(event)}>
+                    <option value="plaintext">Plain Text</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="json">JSON</option>
+                    <option value="sql">SQL</option>
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="java">Java</option>
+                    <option value="python">Python</option>
+                    <option value="cpp">C++</option>
+                    <option value="c">C</option>
+                    <option value="xml">xml</option>
+                </select>
 
                 <Editor
                     code={this.state.code}
@@ -88,6 +109,7 @@ class TextEditor extends Component {
                     editorWidth={this.state.editorWidth}
                     theme={this.state.editorTheme}
                     fontSize={this.state.fontSize}
+                    language={this.state.language}
                 />
             </div>
         );
