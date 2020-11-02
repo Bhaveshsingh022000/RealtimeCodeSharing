@@ -35,9 +35,11 @@ class Landing extends Component {
         if (this.props.isAuth) {
             form = (
                 <React.Fragment>
-                    <form onSubmit={this.formHandler}>
-                        <input type="text" onChange={(event) => this.changeHandler(event)} name="roomName" />
-                        <button type="submit">Join</button>
+                    <form className={classes.JoinForm} onSubmit={this.formHandler}>
+                        <h1>A Real Time Code Editor</h1>
+                        <p>for Collabrative Development</p>
+                        <input type="text" placeholder="Room Name" onChange={(event) => this.changeHandler(event)} name="roomName" />
+                        <button type="submit">Join Room</button>
                     </form>
                     <button onClick={this.clickHandel}>Share</button>
                 </React.Fragment>
@@ -45,7 +47,7 @@ class Landing extends Component {
         }
         return (
             <div className={classes.MainContainer}>
-                <h1>CODE EDITOR</h1>
+                <h1 className={classes.MainHeading}>{'</>'} CODE SHARING</h1>
                 <CoverImage />
                 
                 <div className={classes.LandingContainer}>

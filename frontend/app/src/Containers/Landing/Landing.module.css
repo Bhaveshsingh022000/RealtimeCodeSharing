@@ -9,7 +9,26 @@
     padding: 5px;
     display: inline-block;
     z-index: 50;
-    border: 5px solid sandybrown;
+    border: 0px solid sandybrown;
+}
+
+.JoinForm h1{
+    margin-left: 10px;
+    margin-top: 35px;
+    margin-bottom: 2px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.JoinForm input{
+    margin-top: 15px;
+}
+
+.JoinForm p{
+    margin-left: 10px;
+    color: white;
+    font-size: 20px;
+    letter-spacing: 1px;
 }
 
 .MainContainer{
@@ -18,7 +37,7 @@
     background-color: rgb(70, 152, 184);
 }
 
-h1{
+.MainHeading{
     color: white;
     text-align: center;
 }
