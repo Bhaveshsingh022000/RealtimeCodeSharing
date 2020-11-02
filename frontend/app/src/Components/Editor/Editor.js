@@ -6,7 +6,7 @@ import classes from './Editor.module.css';
 const editor = (props) => {
     const options = {
         selectOnLineNumbers: true,
-        fontSize: 14
+        fontSize: props.fontSize
 
     };
     return (
@@ -15,8 +15,7 @@ const editor = (props) => {
                 width="100%"
                 height="100%"
                 language="javascript"
-                theme="vs-dark"
-                fontSize="50px"
+                theme={props.theme}
                 value={props.code}
                 options={options}
                 onChange={props.change}
