@@ -1,6 +1,8 @@
 .Main{
-    border: 20px solid rgb(190, 122, 230);
+    border: 20px solid rgb(200, 219, 214);
     float: right;
+    position: relative;
+    top: 15%;
     width: 40%;
     height: 60vh;
     margin-right: 30px;

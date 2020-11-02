@@ -44,12 +44,14 @@ class Landing extends Component {
             );
         }
         return (
-            <div>
-                <h1>Landing Page {this.props.roomName}</h1>
+            <div className={classes.MainContainer}>
+                <h1>CODE EDITOR</h1>
+                <CoverImage />
+                
                 <div className={classes.LandingContainer}>
                 {form}
                 </div>
-                <CoverImage />
+                
             </div>
         );
     }
