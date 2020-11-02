@@ -1,7 +1,9 @@
 .Main{
-    border: 20px solid rgb(190, 122, 230);
+    border: 20px solid rgb(200, 219, 214);
     float: right;
-    width: 40%;
+    position: relative;
+    top: 15%;
+    width: 50%;
     height: 60vh;
     margin-right: 30px;
     border-radius: 10px;

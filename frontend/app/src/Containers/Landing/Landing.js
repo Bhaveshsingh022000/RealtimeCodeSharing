@@ -35,21 +35,27 @@ class Landing extends Component {
         if (this.props.isAuth) {
             form = (
                 <React.Fragment>
-                    <form onSubmit={this.formHandler}>
-                        <input type="text" onChange={(event) => this.changeHandler(event)} name="roomName" />
-                        <button type="submit">Join</button>
+                    <form className={classes.JoinForm} onSubmit={this.formHandler}>
+                        <h1>A Real Time Code Editor</h1>
+                        <p>for Collabrative Development</p>
+                        <br />
+                        <input type="text" required minLength="6" maxLength="6" placeholder="Enter Join ID" onChange={(event) => this.changeHandler(event)} name="roomName" />
+                        <button type="submit">Join Editor</button>
                     </form>
-                    <button onClick={this.clickHandel}>Share</button>
+                    <button className={classes.ShareBtn} onClick={this.clickHandel}>Share Editor</button>
                 </React.Fragment>
             );
         }
         return (
-            <div>
-                <h1>Landing Page {this.props.roomName}</h1>
+            <div className={classes.MainContainer}>
+                {this.props.isAuth ? <button className={classes.LogoutBtn} onClick={()=>this.props.onLogout()}>Logout</button> : null}
+                <h1 className={classes.MainHeading}>{'</>'} CODE SHARING</h1>
+                <CoverImage />
+                
                 <div className={classes.LandingContainer}>
                 {form}
                 </div>
-                <CoverImage />
+                
             </div>
         );
     }
@@ -58,13 +64,15 @@ class Landing extends Component {
 const mapStateToProps = state => {
     return {
         roomName: state.editor.roomName,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        userName : state.auth.userName
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onJoinRoom: (name) => dispatch(actions.getRoomName(name)),
+        onLogout: ()=> dispatch(actions.logout())
     }
 }
 

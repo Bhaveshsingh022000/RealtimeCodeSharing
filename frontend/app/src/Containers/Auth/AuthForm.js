@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import InputElement from '../../Components/UI/Input/Input';
 import classes from './AuthForm.module.css';
+import Spinner from '../../Components/UI/Spinner/Spinner';
 
 class Auth extends Component {
     state = {
-        showLogin: false,
+        showLogin: true,
         signupForm: {
             name: {
                 elementConfig: {
@@ -19,8 +20,6 @@ class Auth extends Component {
                     required: true,
                     minLength: 3
                 },
-                valid: false,
-                touched: false
             },
             email: {
                 elementConfig: {
@@ -32,8 +31,6 @@ class Auth extends Component {
                     required: true,
                     isEmail: true
                 },
-                valid: false,
-                touched: false
             },
             password: {
                 elementConfig: {
@@ -44,9 +41,7 @@ class Auth extends Component {
                 validation: {
                     required: true,
                     minLength: 6
-                },
-                valid: false,
-                touched: false
+                }
             },
             confpassword: {
                 elementConfig: {
@@ -58,8 +53,6 @@ class Auth extends Component {
                     required: true,
                     minLength: 6
                 },
-                valid: false,
-                touched: false
             },
         },
         loginForm: {
@@ -71,10 +64,7 @@ class Auth extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    isEmail: true
                 },
-                valid: false,
-                touched: false
             },
             password: {
                 elementConfig: {
@@ -86,10 +76,9 @@ class Auth extends Component {
                     required: true,
                     minLength: 6
                 },
-                valid: false,
-                touched: false
             },
-        }
+        },
+        error: null
 
     }
 
@@ -122,12 +111,28 @@ class Auth extends Component {
         this.setState((state, props) => ({
             showLogin: !state.showLogin
         }))
+        this.props.onErrorCleanUp();
     }
+
 
     formSubmitHandler = (event) => {
         event.preventDefault();
         if (this.state.showLogin) {
-            this.props.onLogin();
+            this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value);
+        }
+        else {
+            const name = this.state.signupForm.name.value;
+            const email = this.state.signupForm.email.value;
+            const password = this.state.signupForm.password.value;
+            const confpass = this.state.signupForm.confpassword.value;
+            if (password === confpass) {
+                this.setState({ error: null });
+                this.props.onSignUp(name, email, password);
+            }
+            else {
+                this.setState({ error: "Password and Confirm Password Should be Same" });
+            }
+
         }
     }
 
@@ -170,15 +175,22 @@ class Auth extends Component {
                 />
             ))
         }
+        if (this.props.loading) {
+            form = <Spinner />
+        }
         return (
             <div className={classes.FormContainer}>
                 <form onSubmit={(event) => this.formSubmitHandler(event)}>
-                    <h1>{this.state.showLogin ? 'Login' : 'Signup'}</h1>
+                    <h1 style={{ marginBottom: "10px" }}>{this.state.showLogin ? 'Login' : 'Signup'}</h1>
+                    <hr />
+                    <br />
                     {form}
-                    <button type="submit">{this.state.showLogin ? 'Login' : 'Signup'}</button>
+                    <p className={classes.ErrorMsg}>{this.props.error}</p>
+                    <button className={classes.SubBtn} type="submit">{this.state.showLogin ? 'Login' : 'Signup'}</button>
+
                 </form>
-                <p>or</p>
-                {this.state.showLogin ? <button className={classes.switchBtn} onClick={this.formShowHandler}>Signup</button> : <button onClick={this.formShowHandler}>Login</button>}
+                <p className={classes.SwitchMsg}>{this.state.showLogin ? "Don't Have a Account ?" : "Already have an Account ?"}</p>
+                {this.state.showLogin ? <button className={classes.switchBtn} onClick={this.formShowHandler}>Signup</button> : <button className={classes.switchBtn} onClick={this.formShowHandler}>Login</button>}
             </div>
         );
     }
@@ -186,13 +198,17 @@ class Auth extends Component {
 
 const mapStateToProps = state => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        loading: state.auth.loading,
+        error: state.auth.error
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogin: () => dispatch(actions.startAuth())
+        onLogin: (email, password) => dispatch(actions.startLogin(email, password)),
+        onSignUp: (name, email, password) => dispatch(actions.postSignUp(name, email, password)),
+        onErrorCleanUp: () => dispatch(actions.errorCleanUp())
     }
 }
 

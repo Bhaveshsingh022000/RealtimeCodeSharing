@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+
 import './App.css';
 import TextEditor from './Containers/textEditior';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import Landing from './Containers/Landing/Landing';
-import axios from 'axios';
 
 class App extends Component {
   state = {
@@ -18,16 +19,35 @@ class App extends Component {
 
 
   render() {
+    let routes = (
+      <Switch>
+          <Route path="/" exact component={Landing} />
+          <Redirect to="/" />
+        </Switch>
+    );
+    if(this.props.isAuth){
+      routes = (
+        <Switch>
+          <Route path="/editor" component={TextEditor} />
+          <Route path="/" exact component={Landing} />
+          <Redirect to="/" />
+        </Switch>
+      );
+    }
+    
     return (  
       <div className="App">
-        <Switch>
-          <Route path="/editor" exact component={TextEditor} />
-          <Route path="/" component={Landing} />
-        </Switch>
+        {routes}
       </div>
     );
   }
 
 }
 
-export default withRouter(App);
+const mapStateToProps = (state)=>{
+  return{
+    isAuth: state.auth.isAuth
+  }
+}
+
+export default connect(mapStateToProps,null)(withRouter(App));
