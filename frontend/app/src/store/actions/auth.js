@@ -39,7 +39,7 @@ export const autoLogout = (remainingTime)=>{
     return dispatch =>{
         setTimeout(()=>{
             dispatch(logout());
-        },5000)
+        },remainingTime)
     }
 }
 
