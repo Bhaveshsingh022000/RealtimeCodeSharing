@@ -37,7 +37,7 @@ class Landing extends Component {
                 <React.Fragment>
                     <form className={classes.JoinForm} onSubmit={this.formHandler}>
                         <h1>A Real Time Code Editor</h1>
-                        <p>for Collabrative Development</p>
+                        <p>for Collaborative Development</p>
                         <br />
                         <input type="text" required minLength="6" maxLength="6" placeholder="Enter Join ID" onChange={(event) => this.changeHandler(event)} name="roomName" />
                         <button type="submit">Join Editor</button>
@@ -49,7 +49,7 @@ class Landing extends Component {
         return (
             <div className={classes.MainContainer}>
                 {this.props.isAuth ? <button className={classes.LogoutBtn} onClick={()=>this.props.onLogout()}>Logout</button> : null}
-                <h1 className={classes.MainHeading}>{'</>'} CODE SHARING</h1>
+                <h1 className={classes.MainHeading}>{'</>'} CODE CONCERT</h1>
                 <CoverImage />
                 
                 <div className={classes.LandingContainer}>
