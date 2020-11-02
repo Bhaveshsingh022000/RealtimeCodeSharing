@@ -4,7 +4,8 @@ const initialState = {
     isAuth: false,
     error: false,
     loading: false,
-    userName: null
+    userName: null,
+    token: null
 }
 
 const reducer = (state = initialState, action)=>{
@@ -19,8 +20,9 @@ const reducer = (state = initialState, action)=>{
         case actionTypes.LOGOUT:
             return{
                 ...state,
-                isAuth: action.isAuth,
-                userName: action.userName
+                isAuth: false,
+                userName: null,
+                token: null
             }
         case actionTypes.AUTH_START:
             return{

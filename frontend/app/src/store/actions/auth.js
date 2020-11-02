@@ -27,10 +27,11 @@ export const loginFailed = (message)=>{
 }
 
 export const logout = ()=>{
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('expiryDate');
     return{
         type: actionTypes.LOGOUT,
-        isAuth: false,
-        userName: null
     }
 }
 
@@ -38,7 +39,7 @@ export const autoLogout = (remainingTime)=>{
     return dispatch =>{
         setTimeout(()=>{
             dispatch(logout());
-        },remainingTime)
+        },5000)
     }
 }
 
