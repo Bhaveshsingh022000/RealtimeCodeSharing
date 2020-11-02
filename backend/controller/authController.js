@@ -4,17 +4,17 @@ const {validationResult} = require('express-validator/check');
 
 exports.postLogin = (req, res, next) => {
     const email = req.body.email;
-    const pass = req.body.password;
+    const password = req.body.password;
     let fetchedUser;
     UserModel.findOne({ email: email })
         .then(result => {
             // console.log(result);
             if (result) {
                 fetchedUser = result;
-                return result.password === pass;
+                return bcrypt.compare(password, result.password);
             }
             else {
-                const error = new Error("user not found");
+                const error = new Error("User not found");
                 error.statusCode = 401;
                 error.message = "User not found";
                 throw error;
@@ -45,10 +45,29 @@ exports.postSignUp = (req,res,next)=>{
         throw error
     }
     const email = req.body.email;
-    const pass = req.body.password;
+    const password = req.body.password;
     const name = req.body.name;
-    console.log(email,pass,name);
-    res.json({
-        message: "ok"
-    })
-}
+    // console.log(email,pass,name);
+    bcrypt.hash(password, 12)
+        .then(hashedPwd =>{
+            const user = new UserModel({
+                email: email,
+                password: hashedPwd,
+                name: name
+            });
+            return user.save();
+        })
+        .then(result =>{
+            res.status(201)
+                .json({
+                    message: 'User Created',
+                    userId: result._id
+                })
+        })
+        .catch(err =>{
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            next(err);
+        })
+};
