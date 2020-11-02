@@ -11,3 +11,5 @@ export const SIGNUP_FAILED = 'SIGNUP_FAILED';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 
 export const LOGOUT = 'LOGOUT';
+
+export const ERROR_CLEANUP = 'ERROR_CLEANUP'

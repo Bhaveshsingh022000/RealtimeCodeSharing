@@ -2,9 +2,9 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     isAuth: true,
-    error: false,
+    error: null,
     loading: false,
-    userName: null,
+    userName: "Bhavesh",
     token: null
 }
 
@@ -16,6 +16,11 @@ const reducer = (state = initialState, action)=>{
                 isAuth: action.isAuth,
                 loading: action.loading,
                 userName: action.userName
+            }
+        case actionTypes.ERROR_CLEANUP:
+            return{
+                ...state,
+                error: null
             }
         case actionTypes.LOGOUT:
             return{

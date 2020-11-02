@@ -8,7 +8,7 @@ import Spinner from '../../Components/UI/Spinner/Spinner';
 
 class Auth extends Component {
     state = {
-        showLogin: false,
+        showLogin: true,
         signupForm: {
             name: {
                 elementConfig: {
@@ -111,6 +111,7 @@ class Auth extends Component {
         this.setState((state, props) => ({
             showLogin: !state.showLogin
         }))
+        this.props.onErrorCleanUp();
     }
 
 
@@ -180,13 +181,16 @@ class Auth extends Component {
         return (
             <div className={classes.FormContainer}>
                 <form onSubmit={(event) => this.formSubmitHandler(event)}>
-                    <h1>{this.state.showLogin ? 'Login' : 'Signup'}</h1>
+                    <h1 style={{ marginBottom: "10px" }}>{this.state.showLogin ? 'Login' : 'Signup'}</h1>
+                    <hr />
+                    <br />
                     {form}
-                    <button type="submit">{this.state.showLogin ? 'Login' : 'Signup'}</button>
-                    <p>{this.state.error}</p>
+                    <p className={classes.ErrorMsg}>{this.props.error}</p>
+                    <button className={classes.SubBtn} type="submit">{this.state.showLogin ? 'Login' : 'Signup'}</button>
+
                 </form>
-                <p>or</p>
-                {this.state.showLogin ? <button className={classes.switchBtn} onClick={this.formShowHandler}>Signup</button> : <button onClick={this.formShowHandler}>Login</button>}
+                <p className={classes.SwitchMsg}>{this.state.showLogin ? "Don't Have a Account ?" : "Already have an Account ?"}</p>
+                {this.state.showLogin ? <button className={classes.switchBtn} onClick={this.formShowHandler}>Signup</button> : <button className={classes.switchBtn} onClick={this.formShowHandler}>Login</button>}
             </div>
         );
     }
@@ -195,14 +199,16 @@ class Auth extends Component {
 const mapStateToProps = state => {
     return {
         isAuth: state.auth.isAuth,
-        loading: state.auth.loading
+        loading: state.auth.loading,
+        error: state.auth.error
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onLogin: (email, password) => dispatch(actions.startLogin(email, password)),
-        onSignUp: (name,email,password) => dispatch(actions.postSignUp(name,email,password))
+        onSignUp: (name, email, password) => dispatch(actions.postSignUp(name, email, password)),
+        onErrorCleanUp: () => dispatch(actions.errorCleanUp())
     }
 }
 
