@@ -16,6 +16,12 @@ const reducer = (state = initialState, action)=>{
                 loading: action.loading,
                 userName: action.userName
             }
+        case actionTypes.LOGOUT:
+            return{
+                ...state,
+                isAuth: action.isAuth,
+                userName: action.userName
+            }
         case actionTypes.AUTH_START:
             return{
                 ...state,

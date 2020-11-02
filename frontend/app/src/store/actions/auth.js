@@ -26,6 +26,22 @@ export const loginFailed = (message)=>{
     }
 }
 
+export const logout = ()=>{
+    return{
+        type: actionTypes.LOGOUT,
+        isAuth: false,
+        userName: null
+    }
+}
+
+export const autoLogout = (remainingTime)=>{
+    return dispatch =>{
+        setTimeout(()=>{
+            dispatch(logout());
+        },remainingTime)
+    }
+}
+
 export const startLogin = (email,password)=>{
     return dispatch =>{
         dispatch(startAuth());
@@ -43,7 +59,13 @@ export const startLogin = (email,password)=>{
                     console.log('Error!');
                     throw new Error('Could not authenticate you!');
                   }
+                localStorage.setItem('token',res.data.token);
+                localStorage.setItem('userId', res.data.userId);
+                const expiresIn = 60 * 60 * 1000;
+                const expiryDate = new Date(new Date().getTime()+expiresIn);
+                localStorage.setItem('expiryDate', expiryDate.toISOString());
                 dispatch(setAuth(res.data.name));
+                dispatch(autoLogout(expiresIn));
             })
             .catch(err =>{
                 dispatch(loginFailed(err.response.data.message));
