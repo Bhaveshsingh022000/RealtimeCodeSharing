@@ -5,9 +5,9 @@ The frontend of this project is built using React and Backend is built using Nod
 </p>
 <h2>Steps To Start This Project</h2>
 <ul>
-  <li>Navigate to "backend" folder and run npm install</li>
-  <li>Naviagte to "frontend" folder then to "app" folder and run npm install</li>
-  <li>In "backend" folder run npm start</li>
-  <li>In "frontend" folder run npm start</li>
-  <li>In browser go to http://localhost:3000/</li>
+  <li>Navigate to "backend" folder and run npm install in CMD</li>
+  <li>Naviagte to "frontend" folder then to "app" folder and run npm install in CMD</li>
+  <li>In "backend" folder run npm start in CMD</li>
+  <li>In "frontend" folder run npm start in CMD</li>
+  <li>Open browser go to http://localhost:3000/</li>
 </ul>
